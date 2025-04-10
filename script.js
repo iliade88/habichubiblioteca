@@ -44,6 +44,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Añadimos un evento para que el buscador funcione al pulsar Enter
+    searchInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            const query = searchInput.value.trim();
+            if (query) {
+                searchExternalBooks(query);
+            } else {
+                searchResultsDiv.innerHTML = '<p>Por favor, introduce un término de búsqueda.</p>';
+            }
+        }
+    });
+
     async function searchExternalBooks(query) {
         searchResultsDiv.innerHTML = '<p>Buscando libros...</p>';
         try {
