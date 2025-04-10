@@ -183,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const currentStatus = book.status;
             const oppositeStatus = currentStatus === 'en-posesion' ? 'lo-quiero' : 'en-posesion';
-            const currentIcon = currentStatus === 'en-posesion' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-heart"></i>';
-            const oppositeIcon = currentStatus === 'en-posesion' ? '<i class="far fa-heart"></i>' : '<i class="far fa-check-circle"></i>';
+            const currentIcon = currentStatus === 'en-posesion' ? '<i class="fas fa-check-circle" style="color: green;"></i>' : '<i class="fas fa-heart" style="color: yellow;"></i>';
+            const oppositeIcon = currentStatus === 'en-posesion' ? '<i class="far fa-heart" style="color: gray;"></i>' : '<i class="far fa-check-circle" style="color: gray;"></i>';
 
             bookElement.innerHTML = `
                 <div class="book-info">
@@ -199,7 +199,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="status-icon inactive" data-id="${book.id}" data-status="${oppositeStatus}">
                         ${oppositeIcon}
                     </span>
-                    <button class="delete-book" data-id="${book.id}">Eliminar</button>
+                    <span class="delete-book" data-id="${book.id}" style="cursor: pointer; color: red;">
+                        <i class="fas fa-trash"></i>
+                    </span>
                 </div>
             `;
             libraryListDiv.appendChild(bookElement);
@@ -214,9 +216,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        const deleteButtons = document.querySelectorAll('.delete-book');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function() {
+        const deleteIcons = document.querySelectorAll('.delete-book');
+        deleteIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
                 const bookIdToDelete = this.dataset.id;
                 deleteBook(parseInt(bookIdToDelete));
             });

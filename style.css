@@ -156,6 +156,27 @@ footer {
     gap: 10px;
 }
 
+/* Estilos para los iconos de estado y eliminar */
+.status-icon {
+    cursor: pointer;
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+.status-icon.active {
+    pointer-events: none;
+}
+
+.delete-book {
+    font-size: 1.5em;
+    color: red;
+    transition: color 0.3s ease;
+}
+
+.delete-book:hover {
+    color: darkred;
+}
+
 /* Ajustes para dispositivos móviles */
 @media (max-width: 768px) {
     header h1 {
