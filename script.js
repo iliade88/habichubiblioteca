@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('search-button');
     const searchResultsDiv = document.getElementById('search-results');
     const addBookForm = document.getElementById('add-book-form');
-    const showAddFormButton = document.getElementById('show-add-form-button');
     const addBookManualButton = document.getElementById('add-book-manual-button');
     const libraryListDiv = document.getElementById('library-list');
     const titleInput = document.getElementById('title');
@@ -35,11 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     fetchLibrary();
-
-    showAddFormButton.addEventListener('click', () => {
-        addBookForm.style.display = 'block';
-        showAddFormButton.style.display = 'none';
-    });
 
     searchButton.addEventListener('click', () => {
         const query = searchInput.value.trim();
@@ -109,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (title) {
             await addBookToSupabase({ title, author, isbn, status });
             addBookForm.style.display = 'none';
-            showAddFormButton.style.display = 'block';
             titleInput.value = '';
             authorInput.value = '';
             isbnInput.value = '';
