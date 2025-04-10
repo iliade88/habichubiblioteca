@@ -180,6 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
         libraryData.forEach(book => {
             const bookElement = document.createElement('div');
             bookElement.classList.add('book-item');
+            
+            const currentStatus = book.status;
+            const oppositeStatus = currentStatus === 'en-posesion' ? 'lo-quiero' : 'en-posesion';
+            const currentIcon = currentStatus === 'en-posesion' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-heart"></i>';
+            const oppositeIcon = currentStatus === 'en-posesion' ? '<i class="far fa-heart"></i>' : '<i class="far fa-check-circle"></i>';
+
             bookElement.innerHTML = `
                 <div class="book-info">
                     <strong>${book.title}</strong><br>
@@ -187,17 +193,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${book.isbn ? 'ISBN: ' + book.isbn : ''}
                 </div>
                 <div class="book-actions">
-                    <span class="status-icon ${book.status}">
-                        ${book.status === 'en-posesion' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-heart"></i>'}
+                    <span class="status-icon active" data-id="${book.id}" data-status="${currentStatus}">
+                        ${currentIcon}
                     </span>
-                    <select class="change-status" data-id="${book.id}">
-                        <option value="en-posesion" ${book.status === 'en-posesion' ? 'selected' : ''}>En posesión</option>
-                        <option value="lo-quiero" ${book.status === 'lo-quiero' ? 'selected' : ''}>Lo quiero</option>
-                    </select>
+                    <span class="status-icon inactive" data-id="${book.id}" data-status="${oppositeStatus}">
+                        ${oppositeIcon}
+                    </span>
                     <button class="delete-book" data-id="${book.id}">Eliminar</button>
                 </div>
             `;
             libraryListDiv.appendChild(bookElement);
+        });
+
+        const statusIcons = document.querySelectorAll('.status-icon.inactive');
+        statusIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                const bookId = this.dataset.id;
+                const newStatus = this.dataset.status;
+                updateBookStatus(parseInt(bookId), newStatus);
+            });
         });
 
         const deleteButtons = document.querySelectorAll('.delete-book');
@@ -205,15 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', function() {
                 const bookIdToDelete = this.dataset.id;
                 deleteBook(parseInt(bookIdToDelete));
-            });
-        });
-
-        const statusSelects = document.querySelectorAll('.change-status');
-        statusSelects.forEach(select => {
-            select.addEventListener('change', function() {
-                const bookIdToUpdate = this.dataset.id;
-                const newStatus = this.value;
-                updateBookStatus(parseInt(bookIdToUpdate), newStatus);
             });
         });
     }
