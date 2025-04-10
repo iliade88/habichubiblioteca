@@ -35,24 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchLibrary();
 
-    searchButton.addEventListener('click', () => {
+    // Unificar el comportamiento del botón y la tecla Enter
+    function handleSearch() {
         const query = searchInput.value.trim();
         if (query) {
             searchExternalBooks(query);
         } else {
             searchResultsDiv.innerHTML = '<p>Por favor, introduce un término de búsqueda.</p>';
         }
-    });
+    }
 
-    // Añadimos un evento para que el buscador funcione al pulsar Enter
+    searchButton.addEventListener('click', handleSearch);
+
     searchInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
-            const query = searchInput.value.trim();
-            if (query) {
-                searchExternalBooks(query);
-            } else {
-                searchResultsDiv.innerHTML = '<p>Por favor, introduce un término de búsqueda.</p>';
-            }
+            handleSearch();
         }
     });
 
