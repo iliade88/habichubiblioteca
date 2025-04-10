@@ -129,3 +129,26 @@ footer {
     color: white;
     border-radius: 4px;
 }
+
+/* Estilos para los botones 'En posesión' y 'Lo quiero' */
+.add-to-library[data-status="en-posesion"] {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-library[data-status="lo-quiero"] {
+    background-color: #FF5722; /* Naranja */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-library:hover {
+    opacity: 0.9;
+}

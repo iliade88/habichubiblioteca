@@ -80,8 +80,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         const author = this.dataset.author;
                         const isbn = this.dataset.isbn;
                         const status = this.dataset.status;
-                        addBookToSupabase({ title, author, isbn, status });
-                        searchResultsDiv.innerHTML = ''; // Clear search results after adding
+
+                        if (title && status) {
+                            addBookToSupabase({ title, author, isbn, status });
+                            alert(`Libro añadido como: ${status === 'en-posesion' ? 'En posesión' : 'Lo quiero'}`);
+                        } else {
+                            alert('Faltan datos para añadir el libro.');
+                        }
                     });
                 });
 
