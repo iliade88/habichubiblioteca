@@ -210,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Funcionalidad de "Mi Biblioteca"
     const filterInput = document.getElementById('filter-input');
-    const libraryListDiv = document.getElementById('library-list');
 
     filterInput.addEventListener('input', () => {
         const filterValue = filterInput.value.toLowerCase();
@@ -223,9 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Funcionalidad de "Buscador"
-    const searchInput = document.getElementById('search-input');
-    const searchButton = document.getElementById('search-button');
-    const searchResultsDiv = document.getElementById('search-results');
 
     searchButton.addEventListener('click', async () => {
         const query = searchInput.value;
@@ -269,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Funcionalidad de "Añadir Nuevo Libro"
-    const addBookForm = document.getElementById('add-book-form');
     const addBookButton = document.getElementById('add-book-manual-button');
 
     addBookButton.addEventListener('click', async () => {

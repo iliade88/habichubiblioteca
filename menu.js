@@ -10,4 +10,5 @@ navLinks.forEach(link => {
         sections.forEach(section => {
             section.style.display = section.id === targetId ? 'block' : 'none';
         });
-    });
+    })
+});
