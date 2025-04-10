@@ -1,0 +1,131 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1em 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+section {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+input[type="text"], select {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+#search-results {
+    margin-top: 15px;
+}
+
+.book-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-info {
+    flex-grow: 1;
+}
+
+.book-actions button {
+    margin-left: 10px;
+    background-color: #d9534f;
+}
+
+.book-actions button:hover {
+    background-color: #c9302c;
+}
+
+.status-icon {
+    margin-left: 5px;
+    font-size: 1.2em;
+}
+
+.en-posesion {
+    color: green;
+}
+
+.lo-quiero {
+    color: orange;
+}
+
+#library-list {
+    margin-top: 15px;
+}
+
+#library-list .book-item {
+    display: flex;
+    align-items: center;
+}
+
+#library-list .book-item .status-icon {
+    margin-right: 10px;
+}
+
+#library-list .book-item .book-info {
+    flex-grow: 1;
+}
+
+#library-list .book-item .book-actions button {
+    margin-left: 5px;
+}
+
+#show-add-form-button {
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #333;
+    color: white;
+    border-radius: 4px;
+}
