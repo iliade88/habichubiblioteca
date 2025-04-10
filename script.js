@@ -207,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const statusIcons = document.querySelectorAll('.status-icon.inactive');
         statusIcons.forEach(icon => {
+            icon.style.color = 'gray'; // Cambiar el color de los iconos inactivos a gris
             icon.addEventListener('click', function() {
                 const bookId = this.dataset.id;
                 const newStatus = this.dataset.status;
