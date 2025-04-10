@@ -234,48 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Funcionalidad de "Buscador"
-
-    searchButton.addEventListener('click', async () => {
-        const query = searchInput.value;
-        if (!query) return;
-
-        searchResultsDiv.innerHTML = '<p>Buscando...</p>';
-
-        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-        const data = await response.json();
-
-        searchResultsDiv.innerHTML = '';
-
-        if (data.items) {
-            for (const item of data.items) {
-                const book = item.volumeInfo;
-                const bookDiv = document.createElement('div');
-                bookDiv.classList.add('book');
-
-                const title = book.title || 'Sin título';
-                const author = book.authors ? book.authors.join(', ') : 'Autor desconocido';
-                const isbn = book.industryIdentifiers ? book.industryIdentifiers[0].identifier : 'Sin ISBN';
-
-                const { data: existingBooks } = await supabase
-                    .from('books')
-                    .select('*')
-                    .eq('isbn', isbn);
-
-                if (existingBooks.length > 0) {
-                    bookDiv.innerHTML = `<p><strong>${title}</strong> de ${author} (ISBN: ${isbn}) - <em>Ya lo tengo</em></p>`;
-                } else {
-                    bookDiv.innerHTML = `<p><strong>${title}</strong> de ${author} (ISBN: ${isbn})</p>
-                        <button class="add-possession">En posesión</button>
-                        <button class="add-wishlist">Lo quiero</button>`;
-                }
-
-                searchResultsDiv.appendChild(bookDiv);
-            }
-        } else {
-            searchResultsDiv.innerHTML = '<p>No se encontraron resultados.</p>';
-        }
-    });
 
     // Funcionalidad de "Añadir Nuevo Libro"
     const addBookButton = document.getElementById('add-book-manual-button');
