@@ -1,5 +1,3 @@
-import { createClient } from '@supabase/supabase-js';
-
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
