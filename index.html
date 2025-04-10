@@ -12,20 +12,32 @@
 <body>
     <header>
         <h1>Mi Biblioteca Personal</h1>
+        <nav>
+            <ul>
+                <li><a href="#library-section" id="nav-library">Mi Biblioteca</a></li>
+                <li><a href="#search-section" id="nav-search">Buscador</a></li>
+                <li><a href="#add-book-section" id="nav-add-book">Añadir Nuevo Libro</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <section id="search-section">
-            <h2>Buscar Libros</h2>
+        <section id="library-section" class="page-section">
+            <h2>Mi Biblioteca</h2>
+            <input type="text" id="filter-input" placeholder="Filtrar por título, autor, ISBN...">
+            <div id="library-list"></div>
+        </section>
+
+        <section id="search-section" class="page-section" style="display: none;">
+            <h2>Buscador</h2>
             <input type="text" id="search-input" placeholder="Título, Autor, ISBN...">
             <button id="search-button">Buscar</button>
             <div id="search-results"></div>
         </section>
 
-        <section id="add-book-section">
+        <section id="add-book-section" class="page-section" style="display: none;">
             <h2>Añadir Nuevo Libro</h2>
-            <button id="show-add-form-button">Añadir Libro Manualmente</button>
-            <form id="add-book-form" style="display: none;">
+            <form id="add-book-form">
                 <label for="title">Título:</label>
                 <input type="text" id="title" required><br><br>
 
@@ -37,17 +49,12 @@
 
                 <label for="status">Estado:</label>
                 <select id="status">
-                    <option value="en-posesion">En posesión <i class="fas fa-check-circle"></i></option>
-                    <option value="lo-quiero">Lo quiero <i class="fas fa-heart"></i></option>
+                    <option value="en-posesion">En posesión</option>
+                    <option value="lo-quiero">Lo quiero</option>
                 </select><br><br>
 
                 <button type="button" id="add-book-manual-button">Guardar Libro</button>
             </form>
-        </section>
-
-        <section id="library-section">
-            <h2>Mi Biblioteca</h2>
-            <div id="library-list"></div>
         </section>
     </main>
 

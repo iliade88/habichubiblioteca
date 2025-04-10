@@ -1,4 +1,5 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+import './menu.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .select('*')
             .order('title', { ascending: true }); // Ordenar por título
 
+            console.log(books)
         if (error) {
             console.error('Error fetching library:', error);
             libraryListDiv.innerHTML = '<p>Error al cargar la biblioteca.</p>';
@@ -205,4 +207,91 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Funcionalidad de "Mi Biblioteca"
+    const filterInput = document.getElementById('filter-input');
+    const libraryListDiv = document.getElementById('library-list');
+
+    filterInput.addEventListener('input', () => {
+        const filterValue = filterInput.value.toLowerCase();
+        const books = Array.from(libraryListDiv.children);
+
+        books.forEach(book => {
+            const text = book.textContent.toLowerCase();
+            book.style.display = text.includes(filterValue) ? 'block' : 'none';
+        });
+    });
+
+    // Funcionalidad de "Buscador"
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const searchResultsDiv = document.getElementById('search-results');
+
+    searchButton.addEventListener('click', async () => {
+        const query = searchInput.value;
+        if (!query) return;
+
+        searchResultsDiv.innerHTML = '<p>Buscando...</p>';
+
+        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+        const data = await response.json();
+
+        searchResultsDiv.innerHTML = '';
+
+        if (data.items) {
+            for (const item of data.items) {
+                const book = item.volumeInfo;
+                const bookDiv = document.createElement('div');
+                bookDiv.classList.add('book');
+
+                const title = book.title || 'Sin título';
+                const author = book.authors ? book.authors.join(', ') : 'Autor desconocido';
+                const isbn = book.industryIdentifiers ? book.industryIdentifiers[0].identifier : 'Sin ISBN';
+
+                const { data: existingBooks } = await supabase
+                    .from('books')
+                    .select('*')
+                    .eq('isbn', isbn);
+
+                if (existingBooks.length > 0) {
+                    bookDiv.innerHTML = `<p><strong>${title}</strong> de ${author} (ISBN: ${isbn}) - <em>Ya lo tengo</em></p>`;
+                } else {
+                    bookDiv.innerHTML = `<p><strong>${title}</strong> de ${author} (ISBN: ${isbn})</p>
+                        <button class="add-possession">En posesión</button>
+                        <button class="add-wishlist">Lo quiero</button>`;
+                }
+
+                searchResultsDiv.appendChild(bookDiv);
+            }
+        } else {
+            searchResultsDiv.innerHTML = '<p>No se encontraron resultados.</p>';
+        }
+    });
+
+    // Funcionalidad de "Añadir Nuevo Libro"
+    const addBookForm = document.getElementById('add-book-form');
+    const addBookButton = document.getElementById('add-book-manual-button');
+
+    addBookButton.addEventListener('click', async () => {
+        const title = document.getElementById('title').value;
+        const author = document.getElementById('author').value;
+        const isbn = document.getElementById('isbn').value;
+        const status = document.getElementById('status').value;
+
+        if (!title) {
+            alert('El título es obligatorio.');
+            return;
+        }
+
+        const { error } = await supabase
+            .from('books')
+            .insert([{ title, author, isbn, status }]);
+
+        if (error) {
+            alert('Error al guardar el libro: ' + error.message);
+        } else {
+            alert('Libro añadido correctamente.');
+            addBookForm.reset();
+        }
+    });
 });
