@@ -31,6 +31,7 @@ nav ul {
     padding: 0;
     margin: 0;
     list-style: none;
+    flex-wrap: wrap; /* Permitir que los botones del menú se ajusten */
 }
 
 nav ul li a {
@@ -160,7 +161,7 @@ footer {
 .status-icon {
     cursor: pointer;
     font-size: 1.5em;
-    margin-right: 10px;
+    margin-right: 5px; /* Reducir el margen entre los iconos de estado */
 }
 
 .status-icon.active {
@@ -230,5 +231,21 @@ footer {
 
     button {
         width: 100%;
+    }
+
+    .book-item {
+        flex-direction: column; /* Alinear los elementos verticalmente en vista móvil */
+        align-items: flex-start;
+    }
+
+    .book-actions {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap; /* Permitir que los botones se ajusten */
+        gap: 5px;
+    }
+
+    .status-icon {
+        font-size: 1.2em; /* Reducir el tamaño de los iconos en vista móvil */
     }
 }
