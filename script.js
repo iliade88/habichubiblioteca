@@ -180,11 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
         libraryData.forEach(book => {
             const bookElement = document.createElement('div');
             bookElement.classList.add('book-item');
-            
+
             const currentStatus = book.status;
             const oppositeStatus = currentStatus === 'en-posesion' ? 'lo-quiero' : 'en-posesion';
-            const currentIcon = currentStatus === 'en-posesion' ? '<i class="fas fa-check-circle" style="color: green;"></i>' : '<i class="fas fa-heart" style="color: yellow;"></i>';
-            const oppositeIcon = currentStatus === 'en-posesion' ? '<i class="far fa-heart" style="color: gray;"></i>' : '<i class="far fa-check-circle" style="color: gray;"></i>';
 
             bookElement.innerHTML = `
                 <div class="book-info">
@@ -194,10 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="book-actions">
                     <span class="status-icon active" data-id="${book.id}" data-status="${currentStatus}">
-                        ${currentIcon}
+                        <i class="fas ${currentStatus === 'en-posesion' ? 'fa-check-circle' : 'fa-heart'}"></i>
                     </span>
                     <span class="status-icon inactive" data-id="${book.id}" data-status="${oppositeStatus}">
-                        ${oppositeIcon}
+                        <i class="far ${currentStatus === 'en-posesion' ? 'fa-heart' : 'fa-check-circle'}"></i>
                     </span>
                     <span class="delete-book" data-id="${book.id}" style="cursor: pointer; color: red;">
                         <i class="fas fa-trash"></i>
