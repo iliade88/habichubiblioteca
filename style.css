@@ -167,6 +167,14 @@ footer {
     pointer-events: none;
 }
 
+.status-icon[data-status="en-posesion"] {
+    color: green;
+}
+
+.status-icon[data-status="lo-quiero"] {
+    color: #d4a017; /* Darker yellow */
+}
+
 .delete-book {
     font-size: 1.5em;
     color: red;
@@ -175,6 +183,29 @@ footer {
 
 .delete-book:hover {
     color: darkred;
+}
+
+/* Aplicar colores a los botones del buscador */
+.add-to-library[data-status="en-posesion"] {
+    background-color: green;
+    color: white;
+}
+
+.add-to-library[data-status="lo-quiero"] {
+    background-color: #d4a017; /* Darker yellow */
+    color: white;
+}
+
+.add-to-library {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-library:hover {
+    opacity: 0.9;
 }
 
 /* Ajustes para dispositivos móviles */
